@@ -4,56 +4,56 @@ public class VirtualPetShelterApp {
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		VirtualPetShelter Shelter = new VirtualPetShelter();
+		VirtualPetShelter shelter = new VirtualPetShelter();
 		
 		boolean quit = false;
-		VirtualPet sweetie = new VirtualPet ("Sweetie", "is a timid sole that loves to cuddle", 50, 50, 50, 50);
-		Shelter.intake(sweetie);
-		VirtualPet pongo = new VirtualPet ("Pongo", "is a hyperactive puppy", 50, 50, 50, 50);
-		Shelter.intake(pongo);
-		VirtualPet lacy = new VirtualPet ("Lacy", "is a fat cat", 50, 50, 50, 50);
-		Shelter.intake(lacy);
+		VirtualPet sweetie = new VirtualPet ("Sweetie", "is a timid sole that loves to cuddle", 50, 50, 50);
+		shelter.intake(sweetie);
+		VirtualPet pongo = new VirtualPet ("Pongo", "is a hyperactive puppy", 50, 50, 50);
+		shelter.intake(pongo);
+		VirtualPet lacy = new VirtualPet ("Lacy", "is a fat cat", 50, 50, 50);
+		shelter.intake(lacy);
 		
 		do {
 			writeLine("\nThank you for volunteering at Happy Pets Animal Shelter!");
 			writeLine("\nHere is the status report for the pets:");
-			writeLine("Name\t|tHunger \t|Thirst  \t|Boredom \t|Cleanliness");
-			writeLine("--------|--------|--------|--------|--------");
+			writeLine("Name\t|tHunger \t|Thirst  \t|Boredom ");
+			writeLine("--------|--------|--------|--------");
 			
-			for (VirtualPet currentPet:Shelter.pets()) {
-				writeLine(currentPet.name + "\t|" + currentPet.hunger + "\t|" + currentPet.thirst + "\t|" + currentPet.boredom + "\t|" + currentPet.claenliness);
+			for (VirtualPet currentPet:shelter.pets()) {
+				writeLine(currentPet.name + "\t|" + currentPet.hunger + "\t|" + currentPet.thirst + "\t|" + currentPet.boredom );
 			}
 			writeLine("What would you like to do next?");
-			writeLine("1. Feed the pets \n2. Water the pets \n3. Play with a pet \4. Adopt a pet \5. Admit a pet \6. Clean pets");
+			writeLine("1. Feed the pets \n2. Water the pets \n3. Play with a pet \4. Adopt a pet \5. Admit a pet ");
 			String response = input.nextLine();
 			
 			switch (response) {
 			case "1"://feed pets
-				Shelter.feedPets();
+				shelter.feedPets();
 				writeLine("Thank you, the pets were hungry!");
 				break;
 				
 			case "2"://water pets
-				Shelter.waterPets();
+				shelter.waterPets();
 				writeLine("Oh boy!, they sure did drink a lot!");
 				break;
 				
 			case "3"://play with a pet
 				writeLine("The pets look bored. Would you like to chose one to play with?\n");
-				displayPets(Shelter);
+				displayPets(shelter);
 				writeLine("\nWho would you like to choose?");
 				String petName = input.nextLine();
-				Shelter.playWith(petName);
+				shelter.playWith(petName);
 				writeLine("You chose" + petName + "to play.");
 				break;
 				
 			case "4"://adoption
 				writeLine("You would like to adopt a pet. Fantastic!These pets are available:\n");
-				displayPets(Shelter);
+				displayPets(shelter);
 				writeLine("\nWho would you like to choose?");
 				String nameToAdopt = input.nextLine();
-				VirtualPet x = Shelter.getPet(nameToAdopt);
-				Shelter.adopt(x);
+				VirtualPet x = shelter(shelter).getPet(nameToAdopt);
+				shelter.adopt(x);
 				writeLine("You adopted" + nameToAdopt + "I know you will take good care of your new pet");
 				break;
 				
@@ -63,23 +63,15 @@ public class VirtualPetShelterApp {
 				writeLine("Please describe the pet:");
 				String description = input.nextLine();
 				VirtualPet p = new VirtualPet(name, description);
-				Shelter.intake(p);
+				shelter.intake(p);
 				writeLine("Thank you for bringing in " + p.getName() + "! We will take good care of this new pet");
 				break;
 				
-			case "6"://cleaning
-				writeLine("Oh no! Looks like the pets made a mess. Chose a pet to clean:");
-				displayPets(Shelter);
-				writeLine("Who would you like to help clean?");
-				String cageName = input.nextLine();
-				Shelter.cleanCage(cageName);
-				writeLine("Thank you for cleaning" + cageName + "They sure did make a mess!");
+			
+			case "6": // do nothing
 				break;
 				
-			case "7": // do nothing
-				break;
-				
-			case "8": //leave the shelter
+			case "7": //leave the shelter
 				writeLine("Thank you for helping out today, see you next time!");
 				System.exit(0);
 				
@@ -88,12 +80,20 @@ public class VirtualPetShelterApp {
 				break;
 			
 			}
-			Shelter.tick();
+			shelter.tick();
 			
 		}while(!quit);
 		input.close();
 					
 		}
+	private static VirtualPetShelterApp shelter(Object virtualpetshelter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	private VirtualPet getPet(String nameToAdopt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	public static void writeLine(String message) {
 		System.out.println(message);
 	}

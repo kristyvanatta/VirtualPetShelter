@@ -4,49 +4,50 @@ import java.util.Map;
 
 public class VirtualPetShelter {
 
-	static Map<String,VirtualPet> pets = new HashMap<>();
+	Map<String,VirtualPet> mapOfPets = new HashMap<String,VirtualPet>();
+	public Collection<VirtualPet>pets(){
+		return mapOfPets.values();
+	}
 	
-	VirtualPet pet;
-
-	private Collection<VirtualPet> feedPets;
-	public void add(VirtualPet pet) {
-		pets.put(pet.getPetName(), pet);
-			
+	public void intake(VirtualPet pet) {
+		mapOfPets.put(pet.name, pet);
 	}
-
-	public VirtualPet findPet(String petName) {
-		return pets.get(petName);
+	public void adopt(VirtualPet pet) {
+		mapOfPets.remove(pet.name);
 	}
-
-	public static Collection<VirtualPet> getAllPets() {
-		return pets.values();
+	public void feedPets() {
+		for(VirtualPet currentPet: pets()) {
+			currentPet.feed();
+		}
 	}
-
-	public void adopt(VirtualPet pet1) {
-		pets.remove(pet1.getPetName(), pet1);
-	}
-
-	public VirtualPet playWith(String petName) {
-		VirtualPet playWith = findPet(petName);
-		return playWith;
-	}
-
-	public Collection<VirtualPet> feedPets() {
-		int hunger = 0;
-		int thirst = 10;
-		int cleanliness = 20; 
-		return feedPets;
-	
-		
-	}
-
 	public void waterPets() {
-		
+		for(VirtualPet currentPet: pets()) {
+			currentPet.water();
+		}
+	}
+	public void playWith(String petName) {
+		for(VirtualPet currentPet: pets()) 
+		currentPet.play();
+		}
+			
+	public void tick() {
+		for(VirtualPet currentPet: pets()) {
+			currentPet.tick();
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return("" + mapOfPets.keySet() + mapOfPets.values());
+	}
+
+
 		
 	}
 
 
-}
+	
+
 
 
 
